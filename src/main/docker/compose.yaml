@@ -2,13 +2,13 @@ name: samurai
 services:
   postgres:
     container_name: samurai_db
-    image: 'postgres:latest'
+    image: 'postgres:17'
     environment:
       - 'POSTGRES_DB=samurai'
       - 'POSTGRES_PASSWORD=password'
       - 'POSTGRES_USER=samurai'
     volumes:
-    - C:\Users\epshiro\Desktop\pgdata:/var/lib/postgresql/data
+    - C:\Users\Youcode\Desktop\data\pgdata:/var/lib/postgresql/data
     ports:
       - '5433:5432'
 volumes:

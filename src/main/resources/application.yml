@@ -1,1 +1,9 @@
-spring.application.name=Hunters_league
+spring:
+  docker:
+    compose:
+      file: src/main/docker/compose.yaml
+
+  liquibase:
+    change-log: db/changelog/master.yaml
+
+
