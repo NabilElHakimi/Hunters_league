@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/2024/10/21-01-changelog.yaml
+  - include:
+      file: db/changelog/2024/10/21-03-changelog.yaml
+  - include:
+      file: db/changelog/2024/10/22-01-changelog.yaml
+  - include:
+      file: db/changelog/2024/10/22-02-changelog.yaml
+

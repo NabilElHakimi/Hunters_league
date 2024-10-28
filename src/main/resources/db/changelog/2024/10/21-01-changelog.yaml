@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1729538408373-1
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_competition
+                  name: id
+                  type: UUID
+            tableName: competition
+  - changeSet:
+      id: 1729538408373-2
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_hunt
+                  name: id
+                  type: UUID
+            tableName: hunt
+  - changeSet:
+      id: 1729538408373-3
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_participation
+                  name: id
+                  type: UUID
+              - column:
+                  name: user_id
+                  type: UUID
+            tableName: participation
+  - changeSet:
+      id: 1729538408373-4
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_species
+                  name: id
+                  type: UUID
+            tableName: species
+  - changeSet:
+      id: 1729538408373-5
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user
+                  name: id
+                  type: UUID
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: cin
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: nationality
+                  type: VARCHAR(255)
+              - column:
+                  name: join_date
+                  type: DATETIME
+              - column:
+                  name: license_expiration_date
+                  type: DATETIME
+            tableName: user
+  - changeSet:
+      id: 1729538408373-6
+      author: epshiro
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: participation
+            constraintName: FK_PARTICIPATION_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user
+

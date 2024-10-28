@@ -1,0 +1,92 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1729551733188-1
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: date
+                  type: DATETIME
+              - column:
+                  name: location
+                  type: VARCHAR(255)
+              - column:
+                  name: max_participants
+                  type: INT
+              - column:
+                  name: min_participants
+                  type: INT
+              - column:
+                  name: open_registration
+                  type: BOOLEAN
+              - column:
+                  name: species_type
+                  type: VARCHAR(255)
+            tableName: competition
+  - changeSet:
+      id: 1729551733188-2
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: competition_id
+                  type: UUID
+            tableName: participation
+  - changeSet:
+      id: 1729551733188-8
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: participation_id
+                  type: UUID
+              - column:
+                  name: species_id
+                  type: UUID
+              - column:
+                  name: weight
+                  type: DOUBLE
+            tableName: hunt
+  - changeSet:
+      id: 1729551733188-12
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: participation_id
+            baseTableName: hunt
+            constraintName: FK_HUNT_ON_PARTICIPATION
+            referencedColumnNames: id
+            referencedTableName: participation
+  - changeSet:
+      id: 1729551733188-13
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: species_id
+            baseTableName: hunt
+            constraintName: FK_HUNT_ON_SPECIES
+            referencedColumnNames: id
+            referencedTableName: species
+  - changeSet:
+      id: 1729551733188-14
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: competition_id
+            baseTableName: participation
+            constraintName: FK_PARTICIPATION_ON_COMPETITION
+            referencedColumnNames: id
+            referencedTableName: competition
+

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1729548786114-1
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: category
+                  type: VARCHAR(255)
+              - column:
+                  name: difficulty
+                  type: VARCHAR(255)
+              - column:
+                  name: minimum_weight
+                  type: DOUBLE
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: points
+                  type: INT
+            tableName: species
+  - changeSet:
+      id: 1729548786114-5
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: name
+            tableName: species
+  - changeSet:
+      id: 1729548786114-7
+      author: OMEN
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: uc_species_name
+            tableName: species
+
