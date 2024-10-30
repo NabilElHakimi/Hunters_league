@@ -2,6 +2,7 @@ package me.elhakimi.hunters_league.services;
 
 import me.elhakimi.hunters_league.domains.User;
 import me.elhakimi.hunters_league.repositories.UserRepository;
+import me.elhakimi.hunters_league.utils.HashPassword;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -19,10 +20,10 @@ public class UserService {
         if (checkUser.isPresent()) {
             return null;
         } else {
+            user.setPassword(HashPassword.hashPassword(user.getPassword())) ;
             return userRepository.save(user);
         }
     }
-
 
 
 
