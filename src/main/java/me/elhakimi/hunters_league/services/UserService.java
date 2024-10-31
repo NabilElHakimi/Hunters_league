@@ -19,30 +19,31 @@ public class UserService {
     private final UserMapper userMapper;
 
 
-    public User login(String email, String password) {
-        Optional<User> user = findByEmail(email);
+    public UserDTO login(String email, String password) {
+        Optional<User> user = findUserByEmail(email);
         if (user.isPresent()) {
             if (HashPassword.checkPassword(password, user.get().getPassword())) {
-                return user.get();
+                return user.map(userMapper::toDto).get();
             }
         }
         return null;
     }
 
-    public User save(User user) {
-        Optional<User> checkUser = findByEmail(user.getEmail());
-        if (checkUser.isPresent()) {
-            return null;
-        } else {
-            user.setJoinDate(LocalDateTime.now());
-            user.setLicenseExpirationDate(LocalDateTime.now().plusMonths(1));
-            user.setPassword(HashPassword.hashPassword(user.getPassword())) ;
-            return userRepository.save(user);
-        }
-    }
 
-    public User update(User user) {
-        return userRepository.save(user);
+    public UserDTO save(User user) {
+            Optional<User> checkUser = findUserByEmail(user.getEmail());
+            if (checkUser.isPresent()) {
+                return null;
+            } else {
+                user.setJoinDate(LocalDateTime.now());
+                user.setLicenseExpirationDate(LocalDateTime.now().plusMonths(1));
+                user.setPassword(HashPassword.hashPassword(user.getPassword())) ;
+                return userMapper.toDto(userRepository.save(user));
+            }
+        }
+
+    public UserDTO update(User user) {
+        return userMapper.toDto(userRepository.save(user));
     }
 
     public Optional<UserDTO> findByUserName(String username) {
@@ -51,7 +52,11 @@ public class UserService {
     }
 
 
-    public Optional<User> findByEmail(String email) {
+    public Optional<UserDTO> findByEmail(String email) {
+        return userRepository.findByEmail(email).map(userMapper::toDto);
+    }
+
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

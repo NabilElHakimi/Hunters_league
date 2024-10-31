@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -20,10 +21,13 @@ public class UserController {
 
     private  final  UserService userService;
 
-    @PostMapping("/update")
-    public ResponseEntity<User> update(@RequestBody @Valid User user) {
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable UUID id, @RequestBody @Valid User user) {
         try {
-            User updatedUser = userService.update(user);
+
+            user.setId(id);
+            UserDTO updatedUser = userService.update(user);
+
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -32,7 +36,6 @@ public class UserController {
 
     @GetMapping("/findByUserName/{userName}")
     public ResponseEntity<Object> findByUserName(@PathVariable String userName) {
-        // Retrieve the user DTO
         Optional<UserDTO> userOptional = userService.findByUserName(userName);
 
         if (userOptional.isPresent()) {
@@ -48,7 +51,7 @@ public class UserController {
 
     @GetMapping("/findByEmail/{email}")
     public ResponseEntity<Object> findByEmail(@PathVariable String email) {
-        User user = userService.findByEmail(email).orElse(null);
+        UserDTO user = userService.findByEmail(email).orElse(null);
 
         if(user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
