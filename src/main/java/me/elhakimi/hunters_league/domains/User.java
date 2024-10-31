@@ -42,6 +42,7 @@ public class User {
 
     @NotBlank
     @NotNull
+    @Email
     private String email;
 
     private String nationality;

@@ -1,6 +1,7 @@
 package me.elhakimi.hunters_league.web.auth;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.User;
 import me.elhakimi.hunters_league.repositories.UserRepository;
 import me.elhakimi.hunters_league.services.UserService;
@@ -14,14 +15,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@AllArgsConstructor
+
 public class Register {
 
     UserService userService;
-
-
-    public Register(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/register")
     public ResponseEntity<Object> save(@RequestBody @Valid User user) {

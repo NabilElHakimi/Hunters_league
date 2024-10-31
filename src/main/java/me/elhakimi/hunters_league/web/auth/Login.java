@@ -2,6 +2,7 @@ package me.elhakimi.hunters_league.web.auth;
 
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.User;
 import me.elhakimi.hunters_league.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@AllArgsConstructor
+
 public class Login {
 
     private  UserService userService;
-
-    public Login(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid User user) {

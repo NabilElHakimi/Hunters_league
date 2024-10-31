@@ -39,12 +39,17 @@ public class UserService {
         }
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
 
     public User update(User user) {
         return userRepository.save(user);
+    }
+
+    public Optional<User> findByLastName(String lastName) {
+        return userRepository.findByLastName(lastName);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }
