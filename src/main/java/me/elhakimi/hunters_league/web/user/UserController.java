@@ -28,9 +28,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/findByLastName/{lastName}")
-    public ResponseEntity<Object> findByLastName(@PathVariable String lastName) {
-        User user = userService.findByLastName(lastName).orElse(null);
+    @GetMapping("/findByUserName/{userName}")
+    public ResponseEntity<Object> findByLastName(@PathVariable String userName) {
+        User user = userService.findByUserName(userName).orElse(null);
         if(user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
@@ -52,4 +52,7 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+
+
 }

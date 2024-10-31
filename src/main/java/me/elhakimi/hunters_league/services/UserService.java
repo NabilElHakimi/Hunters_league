@@ -6,6 +6,7 @@ import me.elhakimi.hunters_league.utils.HashPassword;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,17 +40,16 @@ public class UserService {
         }
     }
 
-
     public User update(User user) {
         return userRepository.save(user);
     }
 
-    public Optional<User> findByLastName(String lastName) {
-        return userRepository.findByLastName(lastName);
+    public Optional<User> findByUserName(String userName) {
+        return userRepository.findByUsername(userName);
     }
+
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
 }
