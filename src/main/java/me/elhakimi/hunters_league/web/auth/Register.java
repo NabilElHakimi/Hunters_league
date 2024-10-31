@@ -1,5 +1,6 @@
 package me.elhakimi.hunters_league.web.auth;
 
+import jakarta.validation.Valid;
 import me.elhakimi.hunters_league.domains.User;
 import me.elhakimi.hunters_league.repositories.UserRepository;
 import me.elhakimi.hunters_league.services.UserService;
@@ -22,9 +23,8 @@ public class Register {
         this.userService = userService;
     }
 
-
     @PostMapping("/register")
-    public ResponseEntity<Object> save(@RequestBody User user) {
+    public ResponseEntity<Object> save(@RequestBody @Valid User user) {
         User savedUser = userService.save(user);
         if (savedUser != null) {
             return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
