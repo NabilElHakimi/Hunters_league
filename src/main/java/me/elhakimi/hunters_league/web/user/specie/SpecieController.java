@@ -19,7 +19,8 @@ public class SpecieController {
     private  final SpecieService specieService;
 
     @GetMapping("/{page}")
-    public ResponseEntity<Page<Specie>> getAllSpecies(@PathVariable int page , @RequestParam(defaultValue = "20") int size) {
+    public ResponseEntity<Page<Specie>> getAllSpecies(@PathVariable int page ,
+                                                      @RequestParam(defaultValue = "20") int size) {
         Page<Specie> species = specieService.getAllSpecies(page, size);
         return new ResponseEntity<>(species, HttpStatus.OK);
     }
