@@ -22,10 +22,17 @@ public class Specie {
     @Column(name = "id")
     private UUID id;
 
+
+    @Enumerated(EnumType.STRING)
     private Category category;
+
+    @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
+
     private double minimumWeight;
+
     private String name;
+
     private Integer points;
 
 }
