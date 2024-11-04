@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user/species/")
+@RequestMapping("x")
 @AllArgsConstructor
 public class SpecieUserController {
 
@@ -23,4 +23,3 @@ public class SpecieUserController {
     }
 
 }
-

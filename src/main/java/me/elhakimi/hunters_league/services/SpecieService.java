@@ -1,15 +1,13 @@
 package me.elhakimi.hunters_league.services;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.Specie;
 import me.elhakimi.hunters_league.repositories.SpecieRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +29,11 @@ public class SpecieService {
 
     public void delete(Specie specie) {
         specieRepository.delete(specie);
+    }
+
+    public Specie getSpecieById(UUID id) {
+
+        return specieRepository.findById(id).orElse(null);
     }
 
 }
