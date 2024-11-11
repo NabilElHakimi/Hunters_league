@@ -5,6 +5,7 @@ import me.elhakimi.hunters_league.domains.User;
 import me.elhakimi.hunters_league.dto.UserDTO;
 import me.elhakimi.hunters_league.dto.mappers.UserMapper;
 import me.elhakimi.hunters_league.repositories.UserRepository;
+import me.elhakimi.hunters_league.services.UserService;
 import me.elhakimi.hunters_league.utils.HashPassword;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final  UserRepository userRepository;
     private final UserMapper userMapper;
