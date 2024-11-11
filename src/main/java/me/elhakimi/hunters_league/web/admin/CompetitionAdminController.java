@@ -3,7 +3,7 @@ package me.elhakimi.hunters_league.web.admin;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.Competition;
-import me.elhakimi.hunters_league.services.CompetitionService;
+import me.elhakimi.hunters_league.services.impls.CompetitionServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class CompetitionAdminController {
 
-    private  final CompetitionService competitionService;
+    private  final CompetitionServiceImpl competitionService;
 
     @PostMapping
     public ResponseEntity<Object> getCompetition(@RequestBody @Valid Competition competition) {

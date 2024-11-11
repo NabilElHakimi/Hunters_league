@@ -1,6 +1,5 @@
 package me.elhakimi.hunters_league;
 
-import me.elhakimi.hunters_league.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,4 +1,4 @@
-package me.elhakimi.hunters_league.services;
+package me.elhakimi.hunters_league.services.impls;
 
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.Specie;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class SpecieService {
+public class SpecieServiceImpl {
     private final SpecieRepository specieRepository;
 
     public Page<Specie> getAllSpecies(int page, int size) {

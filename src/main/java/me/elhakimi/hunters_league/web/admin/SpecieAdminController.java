@@ -2,7 +2,7 @@ package me.elhakimi.hunters_league.web.admin;
 
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.Specie;
-import me.elhakimi.hunters_league.services.SpecieService;
+import me.elhakimi.hunters_league.services.impls.SpecieServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class SpecieAdminController {
 
 
-    private  final SpecieService specieService;
+    private  final SpecieServiceImpl specieService;
 
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody  Specie specie) {

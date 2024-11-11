@@ -2,7 +2,7 @@ package me.elhakimi.hunters_league.web.user.specie;
 
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.Specie;
-import me.elhakimi.hunters_league.services.SpecieService;
+import me.elhakimi.hunters_league.services.impls.SpecieServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class SpecieUserController {
 
-    private  final SpecieService specieService;
+    private  final SpecieServiceImpl specieService;
 
     @GetMapping("/{page}")
     public ResponseEntity<Page<Specie>> getAllSpecies(@PathVariable int page ,

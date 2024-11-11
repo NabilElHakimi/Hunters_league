@@ -1,4 +1,4 @@
-package me.elhakimi.hunters_league.services;
+package me.elhakimi.hunters_league.services.impls;
 
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domains.User;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserServiceImpl {
 
     private final  UserRepository userRepository;
     private final UserMapper userMapper;
