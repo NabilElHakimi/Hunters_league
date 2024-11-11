@@ -43,6 +43,7 @@ public class CompetitionService {
 
     }
 
+
     public Page<Competition> getAllCompetitions(Pageable pageable) {
         return competitionRepository.findAll(pageable);
     }

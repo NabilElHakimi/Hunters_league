@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SpecieAdminController {
 
+
     private  final SpecieService specieService;
 
     @PostMapping
