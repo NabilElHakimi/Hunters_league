@@ -36,7 +36,6 @@ public class Competition {
     @Enumerated(EnumType.STRING)
     private Category speciesType;
 
-
     @NotNull
     private Integer minParticipants;
     @NotNull
@@ -48,5 +47,6 @@ public class Competition {
     /*@OneToMany(mappedBy = "competition")
     private List<Participation> participations;
 }*/
+
 
 }
