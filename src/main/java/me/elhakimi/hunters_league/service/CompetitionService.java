@@ -1,6 +1,6 @@
-package me.elhakimi.hunters_league.services;
+package me.elhakimi.hunters_league.service;
 
-import me.elhakimi.hunters_league.domains.Competition;
+import me.elhakimi.hunters_league.domain.Competition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

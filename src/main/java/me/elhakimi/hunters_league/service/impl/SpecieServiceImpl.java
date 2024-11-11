@@ -1,9 +1,9 @@
-package me.elhakimi.hunters_league.services.impls;
+package me.elhakimi.hunters_league.service.impl;
 
 import lombok.AllArgsConstructor;
-import me.elhakimi.hunters_league.domains.Specie;
-import me.elhakimi.hunters_league.repositories.SpecieRepository;
-import me.elhakimi.hunters_league.services.SpecieService;
+import me.elhakimi.hunters_league.domain.Specie;
+import me.elhakimi.hunters_league.repository.SpecieRepository;
+import me.elhakimi.hunters_league.service.SpecieService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

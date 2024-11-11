@@ -1,6 +1,6 @@
-package me.elhakimi.hunters_league.services;
+package me.elhakimi.hunters_league.service;
 
-import me.elhakimi.hunters_league.domains.User;
+import me.elhakimi.hunters_league.domain.User;
 import me.elhakimi.hunters_league.dto.UserDTO;
 
 import java.util.Optional;

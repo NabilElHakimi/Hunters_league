@@ -1,6 +1,6 @@
-package me.elhakimi.hunters_league.services;
+package me.elhakimi.hunters_league.service;
 
-import me.elhakimi.hunters_league.domains.Specie;
+import me.elhakimi.hunters_league.domain.Specie;
 import org.springframework.data.domain.Page;
 
 import java.util.UUID;

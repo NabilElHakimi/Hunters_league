@@ -1,4 +1,4 @@
-package me.elhakimi.hunters_league.utils;
+package me.elhakimi.hunters_league.util;
 
 
 import org.mindrot.jbcrypt.BCrypt;

@@ -1,8 +1,8 @@
 package me.elhakimi.hunters_league.web.admin;
 
 import lombok.AllArgsConstructor;
-import me.elhakimi.hunters_league.domains.Specie;
-import me.elhakimi.hunters_league.services.impls.SpecieServiceImpl;
+import me.elhakimi.hunters_league.domain.Specie;
+import me.elhakimi.hunters_league.service.impl.SpecieServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

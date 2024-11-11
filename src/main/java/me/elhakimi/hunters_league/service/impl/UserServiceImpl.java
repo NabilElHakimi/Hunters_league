@@ -1,12 +1,12 @@
-package me.elhakimi.hunters_league.services.impls;
+package me.elhakimi.hunters_league.service.impl;
 
 import lombok.AllArgsConstructor;
-import me.elhakimi.hunters_league.domains.User;
+import me.elhakimi.hunters_league.domain.User;
 import me.elhakimi.hunters_league.dto.UserDTO;
 import me.elhakimi.hunters_league.dto.mappers.UserMapper;
-import me.elhakimi.hunters_league.repositories.UserRepository;
-import me.elhakimi.hunters_league.services.UserService;
-import me.elhakimi.hunters_league.utils.HashPassword;
+import me.elhakimi.hunters_league.repository.UserRepository;
+import me.elhakimi.hunters_league.service.UserService;
+import me.elhakimi.hunters_league.util.HashPassword;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

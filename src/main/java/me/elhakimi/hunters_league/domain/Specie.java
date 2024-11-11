@@ -1,9 +1,9 @@
-package me.elhakimi.hunters_league.domains;
+package me.elhakimi.hunters_league.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import me.elhakimi.hunters_league.domains.enums.Category;
-import me.elhakimi.hunters_league.domains.enums.Difficulty;
+import me.elhakimi.hunters_league.domain.enums.Category;
+import me.elhakimi.hunters_league.domain.enums.Difficulty;
 
 import java.util.UUID;
 

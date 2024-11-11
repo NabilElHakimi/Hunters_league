@@ -2,9 +2,9 @@ package me.elhakimi.hunters_league.web.auth;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.elhakimi.hunters_league.domains.User;
+import me.elhakimi.hunters_league.domain.User;
 import me.elhakimi.hunters_league.dto.UserDTO;
-import me.elhakimi.hunters_league.services.impls.UserServiceImpl;
+import me.elhakimi.hunters_league.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

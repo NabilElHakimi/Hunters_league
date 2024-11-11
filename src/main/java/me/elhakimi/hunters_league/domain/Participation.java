@@ -1,4 +1,4 @@
-package me.elhakimi.hunters_league.domains;
+package me.elhakimi.hunters_league.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

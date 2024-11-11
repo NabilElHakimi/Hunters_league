@@ -2,8 +2,8 @@ package me.elhakimi.hunters_league.web.admin;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.elhakimi.hunters_league.domains.Competition;
-import me.elhakimi.hunters_league.services.impls.CompetitionServiceImpl;
+import me.elhakimi.hunters_league.domain.Competition;
+import me.elhakimi.hunters_league.service.impl.CompetitionServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

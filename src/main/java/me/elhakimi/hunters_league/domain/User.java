@@ -1,13 +1,12 @@
-package me.elhakimi.hunters_league.domains;
+package me.elhakimi.hunters_league.domain;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import me.elhakimi.hunters_league.domains.enums.Role;
+import me.elhakimi.hunters_league.domain.enums.Role;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
