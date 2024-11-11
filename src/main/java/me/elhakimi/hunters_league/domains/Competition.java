@@ -7,6 +7,7 @@ import lombok.*;
 import me.elhakimi.hunters_league.domains.enums.Category;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -44,9 +45,6 @@ public class Competition {
     @NotNull
     private Boolean openRegistration;
 
-    /*@OneToMany(mappedBy = "competition")
+    @OneToMany(mappedBy = "competition")
     private List<Participation> participations;
-}*/
-
-
 }
