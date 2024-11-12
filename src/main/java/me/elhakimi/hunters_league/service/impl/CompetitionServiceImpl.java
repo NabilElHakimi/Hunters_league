@@ -2,6 +2,8 @@ package me.elhakimi.hunters_league.service.impl;
 
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domain.Competition;
+import me.elhakimi.hunters_league.dto.CompetitionDTO;
+import me.elhakimi.hunters_league.dto.mappers.CompetitionMapper;
 import me.elhakimi.hunters_league.repository.CompetitionRepository;
 import me.elhakimi.hunters_league.service.CompetitionService;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import java.util.UUID;
 public class CompetitionServiceImpl implements CompetitionService {
 
     private final CompetitionRepository competitionRepository ;
+    private final CompetitionMapper competitionMapper;
 
     public Competition save(Competition competition){
 
@@ -47,6 +50,11 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     public Page<Competition> getAllCompetitions(Pageable pageable) {
         return competitionRepository.findAll(pageable);
+    }
+
+
+    public Page<CompetitionDTO> getCompetitionsDetails(Pageable pageable) {
+        return competitionRepository.findAll(pageable).map(competitionMapper::toDto);
     }
 
 }
