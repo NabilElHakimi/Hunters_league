@@ -53,8 +53,11 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
 
+    @Override
     public Page<CompetitionDTO> getCompetitionsDetails(Pageable pageable) {
-        return competitionRepository.findAll(pageable).map(competitionMapper::toDto);
+        return competitionRepository.findAll(pageable)
+                .map(competitionMapper::toDto);
     }
+
 
 }

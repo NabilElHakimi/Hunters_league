@@ -4,11 +4,19 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import me.elhakimi.hunters_league.domain.enums.Category;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CompetitionDTO {
+
     private String code;
 
     @NotBlank
@@ -29,5 +37,6 @@ public class CompetitionDTO {
 
     @NotNull
     private Boolean openRegistration;
+
 
 }
