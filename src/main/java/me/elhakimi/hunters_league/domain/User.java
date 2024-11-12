@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import me.elhakimi.hunters_league.domain.enums.Role;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -51,9 +52,7 @@ public class User {
 
     private LocalDateTime licenseExpirationDate;
 
-/*
     @OneToMany(mappedBy = "user")
     private List<Participation> participations;
-*/
 
 }
