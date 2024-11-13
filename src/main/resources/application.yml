@@ -16,11 +16,9 @@ spring:
     change-log: db/changelog/master.yaml
   docker:
     compose:
-      file: src/main/docker/compose.yaml  # Path to the docker-compose file
+      file: src/main/docker/compose.yaml
       enabled: true
       lifecycle-management: start_only
 
-
-
 server:
-  port: 8081
+  port: 8082

@@ -1,6 +1,7 @@
 package me.elhakimi.hunters_league.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import me.elhakimi.hunters_league.domain.Participation;
 import me.elhakimi.hunters_league.dto.CompetitionDTO;
@@ -24,6 +25,11 @@ public class ParticipationServiceImpl {
 
     public Page<CompetitionDTO> getCompetitionsDetails(Pageable pageable) {
         return competitionService.getCompetitionsDetails(pageable);
+    }
+
+    @Transactional
+    public void updateParticipationScores() {
+        participationRepository.updateParticipationScores();
     }
 
 }

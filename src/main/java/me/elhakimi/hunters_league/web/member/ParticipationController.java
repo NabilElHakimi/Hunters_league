@@ -28,5 +28,11 @@ public class ParticipationController {
         return ResponseEntity.ok("Save successfully");
     }
 
+    @GetMapping("/update-scores")
+    public ResponseEntity<String> updateScores() {
+        participationService.updateParticipationScores();
+        return ResponseEntity.ok("All scores have been updated");
+    }
+
 }
 
