@@ -59,7 +59,4 @@ public class AppUser implements UserDetails  {
         return authorities;
     }
 
-
-
-
 }
