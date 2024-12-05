@@ -34,6 +34,7 @@ public class ParticipationController {
     private final UserMapper userMapper;
     private final HuntMapper huntMapper;
 
+
     public ParticipationController(ParticipationService participationService, ParticipationMapper participationMapper, CompetitionService competitionService,
                                     UserService userService, HuntService huntService, UserMapper userMapper,HuntMapper huntMapper)
     {
