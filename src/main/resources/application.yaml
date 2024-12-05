@@ -1,0 +1,30 @@
+spring:
+  docker:
+    compose:
+      enabled: true
+      file: src/main/docker/compose.yml
+      lifecycle-management: start_only
+
+  #datasource:
+  #  driver-class-name: org.postgresql.Driver
+  #  url: jdbc:postgresql://localhost:5433/samurai
+  #  username: samurai
+  #  password: password
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: public
+
+  liquibase:
+    enabled: false
+    change-log: db/changelog/master.yaml
+
+  autoconfigure:
+    exclude:
+      # - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      #- org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  task:
+    scheduling:
+      enabled: true
+

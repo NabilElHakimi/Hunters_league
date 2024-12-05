@@ -1,0 +1,216 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1733135053051-1
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_appuser
+                  name: id
+                  type: UUID
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: cin
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: nationality
+                  type: VARCHAR(255)
+              - column:
+                  name: join_date
+                  type: DATETIME
+              - column:
+                  name: license_expiration_date
+                  type: DATETIME
+            tableName: app_user
+  - changeSet:
+      id: 1733135053051-2
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_competition
+                  name: id
+                  type: UUID
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: location
+                  type: VARCHAR(255)
+              - column:
+                  name: date
+                  type: DATETIME
+              - column:
+                  name: species_type
+                  type: VARCHAR(255)
+              - column:
+                  name: min_participants
+                  type: INT
+              - column:
+                  name: max_participants
+                  type: INT
+              - column:
+                  name: open_registration
+                  type: BOOLEAN
+            tableName: competition
+  - changeSet:
+      id: 1733135053051-3
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_hunt
+                  name: id
+                  type: UUID
+              - column:
+                  name: species_id
+                  type: UUID
+              - column:
+                  name: weight
+                  type: DOUBLE
+              - column:
+                  name: participation_id
+                  type: UUID
+            tableName: hunt
+  - changeSet:
+      id: 1733135053051-4
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_participation
+                  name: id
+                  type: UUID
+              - column:
+                  name: app_user_id
+                  type: UUID
+              - column:
+                  name: competition_id
+                  type: UUID
+              - column:
+                  name: score
+                  type: DOUBLE
+            tableName: participation
+  - changeSet:
+      id: 1733135053051-5
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_species
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: category
+                  type: VARCHAR(255)
+              - column:
+                  name: minimum_weight
+                  type: DOUBLE
+              - column:
+                  name: difficulty
+                  type: VARCHAR(255)
+              - column:
+                  name: points
+                  type: INT
+            tableName: species
+  - changeSet:
+      id: 1733135053051-6
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: uc_species_name
+            tableName: species
+  - changeSet:
+      id: 1733135053051-7
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: participation_id
+            baseTableName: hunt
+            constraintName: FK_HUNT_ON_PARTICIPATION
+            referencedColumnNames: id
+            referencedTableName: participation
+  - changeSet:
+      id: 1733135053051-8
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: species_id
+            baseTableName: hunt
+            constraintName: FK_HUNT_ON_SPECIES
+            referencedColumnNames: id
+            referencedTableName: species
+  - changeSet:
+      id: 1733135053051-9
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: app_user_id
+            baseTableName: participation
+            constraintName: FK_PARTICIPATION_ON_APPUSER
+            referencedColumnNames: id
+            referencedTableName: app_user
+  - changeSet:
+      id: 1733135053051-10
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: competition_id
+            baseTableName: participation
+            constraintName: FK_PARTICIPATION_ON_COMPETITION
+            referencedColumnNames: id
+            referencedTableName: competition
+

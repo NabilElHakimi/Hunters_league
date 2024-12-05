@@ -1,0 +1,4 @@
+databaseChangeLog:
+
+  - include:
+      file: db/changelog/2024/12/02-01-changelog.yaml
