@@ -29,8 +29,5 @@ public class CreatNewUserVm {
     private String email;
     @NotBlank @NonNull
     private String nationality;
-    @NotNull
-    private LocalDateTime licenseExpirationDate;
-    @NotNull
-    private LocalDateTime joinDate;
+
 }

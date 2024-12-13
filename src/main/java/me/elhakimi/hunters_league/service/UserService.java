@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -39,6 +40,8 @@ public class UserService implements UserDetailsService {
     public AppUser save(AppUser appUser) {
         if(appUser == null) throw new UserNotExistException("User does not exist");
         if(appUser.getRole()==null) appUser.setRole(Role.MEMBER);
+        appUser.setJoinDate(LocalDateTime.now());
+        appUser.setLicenseExpirationDate(LocalDateTime.now().plusMonths(1));
         UserSearchDto searchDtoByUsername = new UserSearchDto();
         UserSearchDto searchDtoByEmail = new UserSearchDto();
         searchDtoByEmail.setEmail(appUser.getEmail());
