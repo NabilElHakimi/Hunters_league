@@ -28,7 +28,11 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <sonar.login>squ_e8b28cbdc22602a9a8333199863e83ec9f2cf7b6</sonar.login>
+        <sonar.host.url>http://localhost:9000/</sonar.host.url>
+        <sonar.projectKey>huntersleague</sonar.projectKey>
+        <sonar.projectName>Hunters</sonar.projectName>
+        <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+        <sonar.login>sqp_4435a3e8e888de0c6ca5eef8a0369ed2008c1c0e</sonar.login>
     </properties>
     <dependencies>
         <dependency>
@@ -140,9 +144,11 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
+
+
     </dependencies>
 
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -202,7 +208,65 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+        </plugins>
+    </build>-->
+
+
+
+
+
+    <build>
+        <plugins>
+            <!-- SonarQube Scanner Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.8.0.2131</version>
+            </plugin>
+
+            <!-- Jacoco Plugin for Coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <!-- This execution prepares the JaCoCo agent -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- This execution generates the coverage report after tests -->
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Surefire Plugin to run unit tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <!-- Set to false so tests are actually run -->
+                    <skipTests>false</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+
+
 
 </project>

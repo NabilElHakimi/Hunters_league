@@ -5,6 +5,11 @@ spring:
       file: src/main/docker/compose.yml
       lifecycle-management: start_only
 
+sonar:
+  login: admin
+  password: NabilHakimi6714@
+
+
   jpa:
     properties:
       hibernate:
@@ -32,3 +37,4 @@ server:
     key-store-type: PKCS12
     key-store-password: mypassword
   port: 8001
+
