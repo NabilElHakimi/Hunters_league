@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SONAR_PROJECT_KEY = "huntersleague"
+        SONAR_PROJECT_KEY = "me.elhakimi.huntersleague"
         SONAR_TOKEN = "sqp_4435a3e8e888de0c6ca5eef8a0369ed2008c1c0e"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
     }
