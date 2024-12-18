@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo "Checking SonarQube Quality Gate..."
                 script {
-                    def qualityGate = sh(
+                    def qualityGateStatus = sh(
                         script: """
                         curl -s -u "$SONAR_TOKEN:" \
                         "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY" \
@@ -35,10 +35,14 @@ pipeline {
                         """,
                         returnStdout: true
                     ).trim()
-                    if (qualityGate != "OK") {
-                        error "Quality Gate failed with status: ${qualityGate}. Stopping the build."
+
+                    echo "SonarQube Quality Gate Status: ${qualityGateStatus}"
+
+                    if (qualityGateStatus == "OK") {
+                        echo "Quality Gate passed successfully."
+                    } else {
+                        error "Quality Gate failed with status: ${qualityGateStatus}. Stopping the build."
                     }
-                    echo "Quality Gate passed with status: ${qualityGate}. Proceeding..."
                 }
             }
         }
