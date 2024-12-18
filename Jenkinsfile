@@ -1,26 +1,26 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Maven configuré dans Jenkins
+        maven 'Maven'
     }
 
     environment {
-        SONAR_HOST_URL = 'http://host.docker.internal:9000'  // URL du serveur SonarQube
-        SONAR_TOKEN = 'vqOO3u9i9xjRFahNxYEWTtnINlaoXSBSAiZMCI3OWhwVH_w9u4mkZM_3FeJfICbM' // Token valide
+        SONAR_HOST_URL = 'http://host.docker.internal:9000'
+        SONAR_TOKEN = 'vqOO3u9i9xjRFahNxYEWTtnINlaoXSBSAiZMCI3OWhwVH_w9u4mkZM_3FeJfICbM'
     }
 
     stages {
         stage('Cleanup Workspace') {
             steps {
                 echo "Cleaning up workspace..."
-                deleteDir() // Nettoie complètement le workspace
+                deleteDir()
             }
         }
 
         stage('Checkout') {
             steps {
                 echo "Checking out code from Git repository..."
-                sh "git clone https://github.com/ZudaPradana/sonar ."
+                git url: 'https://github.com/ZudaPradana/sonar', branch: 'main'
             }
         }
 
@@ -34,7 +34,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo "Running SonarQube analysis..."
-                withSonarQubeEnv('SonarQube Server') { // Assurez-vous que 'SonarQube Server' est configuré
+                withSonarQubeEnv('SonarQube Server') {
                     sh """
                         mvn clean verify sonar:sonar \
                         -Dsonar.projectKey=huntersleague \
