@@ -27,21 +27,23 @@ pipeline {
             steps {
                 echo "Checking SonarQube Quality Gate..."
                 script {
+                    // Appel API pour récupérer le statut Quality Gate
                     def qualityGateStatus = sh(
                         script: """
                         curl -s -u "$SONAR_TOKEN:" \
                         "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY" \
-                        | grep -oP '(?<="status":")[^"]*'
+                        | grep -oP '(?<="status":")[^"]*' | head -n 1
                         """,
                         returnStdout: true
                     ).trim()
 
                     echo "SonarQube Quality Gate Status: ${qualityGateStatus}"
 
+                    // Condition pour passer ou échouer le pipeline
                     if (qualityGateStatus == "OK") {
-                        echo "Quality Gate passed successfully."
+                        echo "Quality Gate passed successfully! ✅"
                     } else {
-                        error "Quality Gate failed with status: ${qualityGateStatus}. Stopping the build."
+                        error "Quality Gate failed with status: ${qualityGateStatus}. ❌ Stopping the build."
                     }
                 }
             }
@@ -49,13 +51,13 @@ pipeline {
     }
     post {
         success {
-            echo "Pipeline executed successfully!"
+            echo "🎉 Pipeline executed successfully! 🎉"
         }
         failure {
-            echo "Pipeline failed. Please check the logs for more details."
+            echo "❌ Pipeline failed. Please check the logs for more details. ❌"
         }
         always {
-            echo "Pipeline execution complete."
+            echo "Pipeline execution complete. 🕒"
         }
     }
 }
