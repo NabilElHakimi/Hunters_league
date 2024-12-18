@@ -64,8 +64,6 @@ pipeline {
 }
  */
 
-
-
 pipeline {
     agent any
     environment {
@@ -120,9 +118,6 @@ pipeline {
         }
 
         stage('Dockerize Application') {
-            when {
-                expression { true } // This stage only runs if Quality Gate passed
-            }
             steps {
                 echo "Building Docker Image for the application..."
                 sh """
@@ -133,18 +128,18 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                echo "Deploying Docker container..."
+                echo "Deploying Docker container on port 9090..."
                 sh """
                 docker stop springboot-app-container || true
                 docker rm springboot-app-container || true
-                docker run -d -p 8080:8080 --name springboot-app-container $DOCKER_IMAGE:$DOCKER_TAG
+                docker run -d -p 9090:8080 --name springboot-app-container $DOCKER_IMAGE:$DOCKER_TAG
                 """
             }
         }
     }
     post {
         success {
-            echo "🎉 Pipeline executed successfully! Application Dockerized and Running! 🎉"
+            echo "🎉 Pipeline executed successfully! Application Dockerized and Running on port 9090! 🎉"
         }
         failure {
             echo "❌ Pipeline failed. Please check the logs for more details. ❌"
