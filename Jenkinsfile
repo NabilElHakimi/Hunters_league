@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SONAR_PROJECT_KEY = "huntersleague"
-        SONAR_TOKEN = "sqp_4435a3e8e888de0c6ca5eef8a0369ed2008c1c0e"
+        SONAR_PROJECT_KEY = "Hunters-league"
+        SONAR_TOKEN = "sqp_c7497da5cdcb54a4052cda1bf374ec98a5ffced9"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
         DOCKER_IMAGE = "huntersleague/springboot-app"
         DOCKER_TAG = "latest"
