@@ -4,9 +4,6 @@ pipeline {
         SONAR_PROJECT_KEY = "Hunters-league"
         SONAR_TOKEN = "sqp_413cbcf4049a324d5a8814a6a893391de6b3d486"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
-        DOCKER_IMAGE = "huntersleague/springboot-app"
-        DOCKER_TAG = "latest"
-        CONTAINER_NAME = "hunters-league"
     }
     stages {
         stage('Checkout Code') {
@@ -49,34 +46,10 @@ pipeline {
                 }
             }
         }
-
-        stage('Rebuild Docker Image') {
-            steps {
-                echo "Rebuilding Docker Image for the application..."
-                sh """
-                docker -H tcp://localhost:2375 build -t $DOCKER_IMAGE:$DOCKER_TAG .
-                """
-            }
-        }
-
-        stage('Redeploy Application') {
-            steps {
-                echo "Stopping and removing the existing container..."
-                sh """
-                docker -H tcp://localhost:2375 stop $CONTAINER_NAME || true
-                docker -H tcp://localhost:2375 rm $CONTAINER_NAME || true
-                """
-
-                echo "Running a new container with the latest image..."
-                sh """
-                docker -H tcp://localhost:2375 run -d -p 7000:7000 --name $CONTAINER_NAME $DOCKER_IMAGE:$DOCKER_TAG
-                """
-            }
-        }
     }
     post {
         success {
-            echo "🎉 Pipeline executed successfully! The application has been rebuilt and redeployed. 🎉"
+            echo "🎉 Pipeline executed successfully! 🎉"
         }
         failure {
             echo "❌ Pipeline failed. Please check the logs for more details. ❌"
