@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SONAR_PROJECT_KEY = "Hunters-league"
-        SONAR_TOKEN = "sqp_c7497da5cdcb54a4052cda1bf374ec98a5ffced9"
+        SONAR_PROJECT_KEY = "huntersleague"
+        SONAR_TOKEN = "sqp_4435a3e8e888de0c6ca5eef8a0369ed2008c1c0e"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
         DOCKER_IMAGE = "huntersleague/springboot-app"
         DOCKER_TAG = "latest"
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "Rebuilding Docker Image for the application..."
                 sh """
-                docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+                docker -H tcp://localhost:2375 build -t $DOCKER_IMAGE:$DOCKER_TAG .
                 """
             }
         }
@@ -63,13 +63,13 @@ pipeline {
             steps {
                 echo "Stopping and removing the existing container..."
                 sh """
-                docker stop $CONTAINER_NAME || true
-                docker rm $CONTAINER_NAME || true
+                docker -H tcp://localhost:2375 stop $CONTAINER_NAME || true
+                docker -H tcp://localhost:2375 rm $CONTAINER_NAME || true
                 """
 
                 echo "Running a new container with the latest image..."
                 sh """
-                docker run -d -p 7000:7000 --name $CONTAINER_NAME $DOCKER_IMAGE:$DOCKER_TAG
+                docker -H tcp://localhost:2375 run -d -p 7000:7000 --name $CONTAINER_NAME $DOCKER_IMAGE:$DOCKER_TAG
                 """
             }
         }
