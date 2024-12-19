@@ -4,9 +4,7 @@ pipeline {
         SONAR_PROJECT_KEY = "Hunters-league"
         SONAR_TOKEN = "sqp_413cbcf4049a324d5a8814a6a893391de6b3d486"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
-        DOCKERHUB_CREDENTIALS_USR = "nabilhakimi" // Replace with Jenkins' stored username
-        DOCKERHUB_CREDENTIALS_PSW = "Hakimi6714@" // Replace with Jenkins' stored password
-        NEW_VERSION = "latest" // Replace with the appropriate version/tag
+        NEW_VERSION = "tagname"
     }
     stages {
         stage('Checkout Code') {
@@ -54,7 +52,7 @@ pipeline {
             steps {
                 echo "Building Docker image for the application..."
                 sh """
-                docker build -t hmzelidrissi/bank-management-system:${env.NEW_VERSION} .
+                docker build -t nabilhakimi/hunters-league:${env.NEW_VERSION} .
                 """
             }
         }
@@ -63,10 +61,12 @@ pipeline {
             steps {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
-                    sh '''
-                    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                    docker push hmzelidrissi/bank-management-system:${env.NEW_VERSION}
-                    '''
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                        sh '''
+                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                        docker push nabilhakimi/hunters-league:${env.NEW_VERSION}
+                        '''
+                    }
                 }
             }
         }
