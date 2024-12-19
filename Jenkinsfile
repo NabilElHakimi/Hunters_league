@@ -4,6 +4,8 @@ pipeline {
         SONAR_PROJECT_KEY = "Hunters-league"
         SONAR_TOKEN = "sqp_413cbcf4049a324d5a8814a6a893391de6b3d486"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
+        DOCKER_IMAGE = "nabilhakimi/hunters-league"
+        DOCKER_CREDENTIALS_ID = "docker-hub-credentials" // Set this in Jenkins credentials
     }
     stages {
         stage('Checkout Code') {
@@ -43,6 +45,26 @@ pipeline {
                     if (qualityGateStatus != "OK") {
                         error "Quality Gate failed with status: ${qualityGateStatus}. ❌ Stopping the build."
                     }
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo "Building Docker image for the application..."
+                sh """
+                docker build -t ${DOCKER_IMAGE}:latest .
+                """
+            }
+        }
+
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                echo "Pushing Docker image to Docker Hub..."
+                withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID, url: '']) {
+                    sh """
+                    docker push ${DOCKER_IMAGE}:latest
+                    """
                 }
             }
         }
