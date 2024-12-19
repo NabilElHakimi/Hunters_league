@@ -1,40 +1,52 @@
-spring:
-  docker:
-    compose:
-      enabled: true
-      file: src/main/docker/compose.yml
-      lifecycle-management: start_only
+  spring:
 
-sonar:
-  login: admin
-  password: NabilHakimi6714@
+    liquibase:
+      enabled: false
+      change-log: db/changelog/master.yaml
 
+    datasource:
+        url: jdbc:postgresql://host.docker.internal:5433/samurai
+        username: samurai
+        password: password
+        driver-class-name: org.postgresql.Driver
 
-  jpa:
-    properties:
+    jpa:
       hibernate:
-        default_schema: public
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  liquibase:
-    enabled: false
-    change-log: db/changelog/master.yaml
+    docker:
+      compose:
+        enabled: true
+        file: src/main/docker/compose.yml
+        lifecycle-management: start_only
 
-  task:
-    scheduling:
+  sonar:
+    login: admin
+    password: NabilHakimi6714@
+
+    jpa:
+      properties:
+        hibernate:
+          default_schema: public
+
+    task:
+      scheduling:
+        enabled: true
+
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080/realms/hakimi
+            jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+  server:
+    ssl:
       enabled: true
-
-
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/hakimi
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-server:
-  ssl:
-    enabled: true
-    key-store: classpath:mykeystore.p12
-    key-store-type: PKCS12
-    key-store-password: mypassword
-  port: 8001
-
+      key-store: classpath:mykeystore.p12
+      key-store-type: PKCS12
+      key-store-password: mypassword
+    port: 8005
