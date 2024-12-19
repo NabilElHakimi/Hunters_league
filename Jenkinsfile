@@ -43,9 +43,7 @@ pipeline {
 
                     echo "SonarQube Quality Gate Status: ${qualityGateStatus}"
 
-                    if (qualityGateStatus == "OK") {
-                        echo "Quality Gate passed successfully! ✅ Proceeding to rebuild and redeploy the application..."
-                    } else {
+                    if (qualityGateStatus != "OK") {
                         error "Quality Gate failed with status: ${qualityGateStatus}. ❌ Stopping the build."
                     }
                 }
