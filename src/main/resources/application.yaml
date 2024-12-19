@@ -44,9 +44,9 @@
             jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
   server:
-    ssl:
-      enabled: true
-      key-store: classpath:mykeystore.p12
-      key-store-type: PKCS12
-      key-store-password: mypassword
-    port: 8005
+#    ssl:
+#      enabled: true
+#      key-store: classpath:mykeystore.p12
+#      key-store-type: PKCS12
+#      key-store-password: mypassword
+    port: 7000

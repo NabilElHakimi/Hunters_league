@@ -32,7 +32,7 @@
         <sonar.projectKey>Hunters-league</sonar.projectKey>
         <sonar.projectName>Hunters league</sonar.projectName>
         <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
-        <sonar.token>sqp_c7497da5cdcb54a4052cda1bf374ec98a5ffced9</sonar.token>
+        <sonar.token>sqp_413cbcf4049a324d5a8814a6a893391de6b3d486</sonar.token>
     </properties>
 
     <dependencies>

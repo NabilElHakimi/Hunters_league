@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo "Running Maven build and SonarQube analysis..."
                 sh """
-                mvn clean package sonar:sonar -X \
+                mvn clean package sonar:sonar \
                   -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                   -Dsonar.host.url=$SONAR_HOST_URL \
                   -Dsonar.login=$SONAR_TOKEN
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "Rebuilding Docker Image for the application..."
                 sh """
-                docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+                docker -H tcp://localhost:2375 build -t $DOCKER_IMAGE:$DOCKER_TAG .
                 """
             }
         }
@@ -63,13 +63,13 @@ pipeline {
             steps {
                 echo "Stopping and removing the existing container..."
                 sh """
-                docker stop $CONTAINER_NAME || true
-                docker rm $CONTAINER_NAME || true
+                docker -H tcp://localhost:2375 stop $CONTAINER_NAME || true
+                docker -H tcp://localhost:2375 rm $CONTAINER_NAME || true
                 """
 
                 echo "Running a new container with the latest image..."
                 sh """
-                docker run -d -p 7000:7000 --name $CONTAINER_NAME $DOCKER_IMAGE:$DOCKER_TAG
+                docker -H tcp://localhost:2375 run -d -p 7000:7000 --name $CONTAINER_NAME $DOCKER_IMAGE:$DOCKER_TAG
                 """
             }
         }
