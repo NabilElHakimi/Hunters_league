@@ -6,8 +6,8 @@ pipeline {
         SONAR_HOST_URL = "http://host.docker.internal:9000"
         IMAGE_NAME = "springboot-app"
         CONTAINER_NAME = "springboot-app-container"
-        HOST_PORT = "8443" // Host port for the app
-        APP_PORT = "8443"  // Internal app port
+        HOST_PORT = "8443"
+        APP_PORT = "8443"
     }
     stages {
         stage('Checkout Code') {
