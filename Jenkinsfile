@@ -4,7 +4,7 @@ pipeline {
         SONAR_PROJECT_KEY = "Hunters-league"
         SONAR_TOKEN = "sqp_413cbcf4049a324d5a8814a6a893391de6b3d486"
         SONAR_HOST_URL = "http://host.docker.internal:9000"
-        NEW_VERSION = "tagname" // Adjust dynamically as needed
+        NEW_VERSION = "tagname"
     }
     stages {
         stage('Checkout Code') {
@@ -74,11 +74,11 @@ pipeline {
         stage('Deploy Docker Container') {
             steps {
                 script {
-                    echo "Deploying Docker container..."
+                    echo "Deploying Docker container on port 8443..."
                     sh '''
                     docker stop springboot-app-container || true
                     docker rm springboot-app-container || true
-                    docker run -d -p 7000:7000 --name springboot-app-container nabilhakimi/hunters-league:${env.NEW_VERSION}
+                    docker run -d -p 8443:8080 --name springboot-app-container springboot-app
                     '''
                 }
             }
