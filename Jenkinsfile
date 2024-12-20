@@ -78,7 +78,7 @@ pipeline {
                     sh '''
                     docker stop springboot-app-container || true
                     docker rm springboot-app-container || true
-                    docker run -d -p 8081:8080 --name springboot-app-container nabilhakimi/hunters-league:${env.NEW_VERSION}
+                    docker run -d -p 7000:7000 --name springboot-app-container nabilhakimi/hunters-league:${env.NEW_VERSION}
                     '''
                 }
             }
