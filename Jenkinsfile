@@ -124,14 +124,6 @@ pipeline {
         DOCKERHUB_PASSWORD = "Hakimi6714@" // Replace with your actual password
     }
     stages {
-        stage('Checkout Code') {
-            steps {
-                echo "Checking out code from Git repository..."
-                sh '''
-                git clone https://github.com/NabilElHakimi/Hunters_league.git .
-                '''
-            }
-        }
 
         stage('Test Docker Access') {
             steps {
