@@ -10,6 +10,7 @@ pipeline {
         CONTAINER_NAME = "springboot-app-container"
         HOST_PORT = "8443"
         APP_PORT = "8443"
+        RECIPIENT_EMAIL = "hakimi.dev@gmail.com"
     }
     stages {
 
@@ -105,9 +106,19 @@ pipeline {
     post {
         success {
             echo "🎉 Pipeline executed successfully! Application deployed on port 8443. 🎉"
+            emailext(
+                subject: "Pipeline Success: Hunters League",
+                body: "The Jenkins pipeline completed successfully. The application has been deployed on port 8443.",
+                to: "${RECIPIENT_EMAIL}"
+            )
         }
         failure {
             echo "❌ Pipeline failed. Please check the logs for more details. ❌"
+            emailext(
+                subject: "Pipeline Failure: Hunters League",
+                body: "The Jenkins pipeline has failed. Please review the logs for details.",
+                to: "${RECIPIENT_EMAIL}"
+            )
         }
         always {
             echo "Pipeline execution complete. 🕒"

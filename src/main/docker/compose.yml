@@ -1,19 +1,30 @@
 version: '3.8'
 
-name: samurai
-
 services:
   postgres:
     container_name: samurai_db
     image: 'postgres:17'
     environment:
-      POSTGRES_DB: samurai
-      POSTGRES_USER: samurai
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=samurai
+      - POSTGRES_USER=samurai
+      - POSTGRES_PASSWORD=password
     volumes:
-      - C:\Users\Youcode\Desktop\data\pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5433:5432'
+
+  springboot_app:
+    container_name: springboot_app
+    image: nabilhakimi/hunters-league
+    ports:
+      - '8443:8443'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://samurai_db:5432/samurai
+      - SPRING_DATASOURCE_USERNAME=samurai
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
     driver: local

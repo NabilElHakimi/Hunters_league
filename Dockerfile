@@ -4,7 +4,6 @@
 #EXPOSE 7000
 #ENTRYPOINT ["java", "-jar", "/app.jar"]
 
-
 FROM maven:3.8.7-eclipse-temurin-17 AS builder
 WORKDIR /app
 COPY . .
