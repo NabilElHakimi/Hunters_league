@@ -49,4 +49,5 @@
 #      key-store: classpath:mykeystore.p12
 #      key-store-type: PKCS12
 #      key-store-password: mypassword
+
     port: 8443
