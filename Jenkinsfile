@@ -110,7 +110,6 @@ pipeline {
 }
  */
 
-
 pipeline {
     agent any
     environment {
@@ -120,10 +119,19 @@ pipeline {
         IMAGE_NAME = "hunters-league"
         DOCKERHUB_REPO = "nabilhakimi/hunters-league"
         TAG_NAME = "tagname"
-        DOCKERHUB_USERNAME = "nabilhakimi"
-        DOCKERHUB_PASSWORD = "Hakimi6714@" // Replace with your actual password
+        CONTAINER_NAME = "springboot-app-container"
+        HOST_PORT = "8443"
+        APP_PORT = "8443"
     }
     stages {
+        stage('Checkout Code') {
+            steps {
+                echo "Checking out code from Git repository..."
+                sh '''
+                git clone https://github.com/NabilElHakimi/Hunters_league.git .
+                '''
+            }
+        }
 
         stage('Test Docker Access') {
             steps {
@@ -182,9 +190,9 @@ pipeline {
             steps {
                 echo "Pushing Docker image to Docker Hub..."
                 sh '''
-                echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-                docker tag hunters-league $DOCKERHUB_REPO:$TAG_NAME
-                docker push $DOCKERHUB_REPO:$TAG_NAME
+                echo Hakimi6714@ | docker login -u nabilhakimi --password-stdin
+                docker tag hunters-league nabilhakimi/hunters-league:tagname
+                docker push nabilhakimi/hunters-league:tagname
                 '''
             }
         }
@@ -216,7 +224,7 @@ pipeline {
     }
     post {
         success {
-            echo "🎉 Pipeline executed successfully! Application deployed on port ${HOST_PORT}. 🎉"
+            echo "🎉 Pipeline executed successfully! Application deployed on port 8443. 🎉"
         }
         failure {
             echo "❌ Pipeline failed. Please check the logs for more details. ❌"
@@ -226,3 +234,4 @@ pipeline {
         }
     }
 }
+
