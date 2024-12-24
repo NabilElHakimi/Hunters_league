@@ -61,7 +61,6 @@
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                    .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             ;
-
             return http.build();
         }
 
