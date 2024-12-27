@@ -52,6 +52,7 @@
                     .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                            .requestMatchers("/api/competition/details").permitAll()
                             .requestMatchers("/api/auth/**").permitAll()
                             .requestMatchers("/api/user/**").hasRole("ADMIN")
                             .requestMatchers("/api/species/**").hasRole("ADMIN")

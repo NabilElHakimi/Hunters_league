@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService {
     public AppUser getById(UUID id) {
         return userRepository.findById(id).orElse(new AppUser());
     }
+
     public AppUser save(AppUser appUser) {
         if(appUser == null) throw new UserNotExistException("User does not exist");
         if(appUser.getRole()==null) appUser.setRole(Role.MEMBER);
@@ -53,6 +54,7 @@ public class UserService implements UserDetailsService {
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         return userRepository.save(appUser);
     }
+
     public AppUser login(AppUser appUser){
         UserSearchDto searchDto = new UserSearchDto();
         searchDto.setEmail(appUser.getEmail());

@@ -5,7 +5,8 @@
       change-log: db/changelog/master.yaml
 
     datasource:
-        url: jdbc:postgresql://host.docker.internal:5433/samurai
+#        url: jdbc:postgresql://host.docker.internal:5433/samurai
+        url: jdbc:postgresql://localhost:5433/samurai
         username: samurai
         password: password
         driver-class-name: org.postgresql.Driver
@@ -19,7 +20,7 @@
 
     docker:
       compose:
-        enabled: true
+        enabled: false
         file: src/main/docker/compose.yml
         lifecycle-management: start_only
 

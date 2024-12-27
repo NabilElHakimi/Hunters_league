@@ -38,7 +38,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/details")
-    @PreAuthorize("hasRole('MEMBER')")
+//    @PreAuthorize("hasRole('MEMBER')")
     public Page<CompetitionResponseVm> getCompetition(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size ){
         Page<Competition> competitionList = competitionService.findAll(page, size);
         return competitionList.map(competitionMapper::toCompetitionResponseVm);
