@@ -44,6 +44,9 @@
             issuer-uri: http://localhost:8080/realms/hakimi
             jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
+  jwt:
+    secret: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9NRU1CRVIifSx7ImF1dGhvcml0eSI6IkNBTl9QQVJUSUNJUEFURSJ9LHsiYXV0aG9yaXR5IjoiQ0FOX1ZJRVdfUkFOS0lOR1MifSx7ImF1dGhvcml0eSI6IkNBTl9WSUVXX0NPTVBFVElUSU9OUyJ9XSwic3ViIjoiSGFraW1pNjcxNCIsImlhdCI6MTczNTgxNjE0MSwiZXhwIjoxNzM1ODUyMTQxfQ.7-ceFTIerv9h8BzVgKDrPPIoC-_0Y7I9tLCAnuNd_3
+
   server:
 #    ssl:
 #      enabled: true

@@ -55,12 +55,14 @@
                             .requestMatchers("/api/competition/details").permitAll()
                             .requestMatchers("/api/auth/**").permitAll()
                             .requestMatchers("/api/user/**").hasRole("ADMIN")
+                            .requestMatchers("/api/species/list").hasRole("MEMBER")
                             .requestMatchers("/api/species/**").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
                     .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                    .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+
             ;
             return http.build();
         }
@@ -68,14 +70,14 @@
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Allow your Angular app
-            configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
-            configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Allowed headers
-            configuration.setExposedHeaders(List.of("Authorization")); // Expose headers like Authorization if needed
-            configuration.setAllowCredentials(true); // Allow credentials if necessary
+            configuration.setAllowedOrigins(List.of("http://localhost:4200" , "http://localhost:57938"));
+            configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+            configuration.setExposedHeaders(List.of("Authorization"));
+            configuration.setAllowCredentials(true);
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration); // Apply CORS configuration to all endpoints
+            source.registerCorsConfiguration("/**", configuration);
             return source;
         }
 
@@ -88,6 +90,5 @@
         public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
             return authenticationConfiguration.getAuthenticationManager();
         }
-
 
     }
