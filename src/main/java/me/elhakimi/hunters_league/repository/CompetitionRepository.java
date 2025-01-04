@@ -16,4 +16,6 @@ public interface CompetitionRepository extends JpaRepository<Competition, UUID> 
     @Query(value = "SELECT * FROM competition LIMIT :limit OFFSET :offset", nativeQuery = true)
     List<Competition> findAllWithLimit(@Param("offset") long offset, @Param("limit") int limit);
 
+
+
 }

@@ -55,7 +55,8 @@ public class ParticipationController {
     @PostMapping("/create")
     @PreAuthorize("hasRole('MEMBER')")
     public ResponseEntity<ParticipationResponseVm> createParticipation(@Valid @RequestBody CreateParticipationVm createParticipationVm) {
-        AppUser appUser = userService.getById(createParticipationVm.getUserId());
+
+        AppUser appUser = userService.getByUserName(userService.getCurrentUserName());
         Competition competition = competitionService.getById(createParticipationVm.getCompetitionId());
         Participation participation = new Participation();
         participation.setAppUser(appUser);
@@ -63,6 +64,7 @@ public class ParticipationController {
         participation.setScore(createParticipationVm.getScore());
         Participation savedParticipation = participationService.save(participation);
         return ResponseEntity.ok(participationMapper.toParticipationResponseVm(savedParticipation));
+
     }
 
     @GetMapping("/calculateScore/{id}")

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -86,7 +87,21 @@ public class UserService implements UserDetailsService {
         searchDto.setUsername(username);
         AppUser appUserFromDb = userRepository.findOne(UserSpecification.getUsersByCriteria(searchDto)).orElse(null);
         if(appUserFromDb == null) throw new UserNotExistException("User with username: " + username + " not found");
+
         return appUserFromDb;
     }
+
+    public  String getCurrentUserName(){
+        return
+                SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+
+    public AppUser getByUserName(String username) {
+        UserSearchDto searchDto = new UserSearchDto();
+        searchDto.setUsername(username);
+        return userRepository.findOne(UserSpecification.getUsersByCriteria(searchDto)).orElse(null);
+    }
+
 }
 
