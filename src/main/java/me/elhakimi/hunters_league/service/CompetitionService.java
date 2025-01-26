@@ -5,6 +5,7 @@ import me.elhakimi.hunters_league.exceptions.CompetitionException;
 import me.elhakimi.hunters_league.repository.CompetitionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,23 @@ public class CompetitionService {
     }
 
     public Competition save(Competition competition) {
-        Competition lastCompetition = competitionRepository.findTopByOrderByDateDesc();
-        if(lastCompetition!=null && lastCompetition.getDate().isAfter(competition.getDate().minusDays(7)))
-            throw new CompetitionException("You can just create a competition every week");
+//        Competition lastCompetition = competitionRepository.findTopByOrderByDateDesc();
+        competition.setCode(competition.getLocation() + "_" + competition.getDate().getYear() + "-" + competition.getDate().getMonthValue() + "-" + competition.getDate().getDayOfMonth());
+        competition.setOpenRegistration(true);
+//        if(lastCompetition!=null && lastCompetition.getDate().isAfter(competition.getDate().minusDays(7)))
+//            throw new CompetitionException("You can just create a competition every week");
         return competitionRepository.save(competition);
     }
-    public Page<Competition> findAll(int page, int size){
-        PageRequest pageRequest = PageRequest.of(page,size);
+
+    public Competition update(Competition competition) {
+        return competitionRepository.save(competition);
+    }
+
+    public Page<Competition> findAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Order.desc("date")));
         return competitionRepository.findAll(pageRequest);
     }
+
 
     @Scheduled(fixedRate = 86400000)
     public void closeRegistrationsAutomatic(){

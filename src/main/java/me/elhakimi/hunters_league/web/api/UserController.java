@@ -25,8 +25,8 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping("/getAll")
-    public Page<UserResponseVm> getUsers(@Valid UserSearchDto userSearchDto, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
+    @GetMapping("/getAll")
+    public Page<UserResponseVm> getUsers(@Valid UserSearchDto userSearchDto, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size) {
         return userService.searchUsers(userSearchDto,page, size).map(userMapper::toUserResponseVm);
     }
 
@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserResponseVm> deleteUser(@PathVariable UUID id) {
-        AppUser appUser = userService.getById(id);
+    public ResponseEntity<UserResponseVm> deleteUser(@PathVariable String id) {
+        AppUser appUser = userService.getById(UUID.fromString(id));
         userService.delete(appUser);
         return ResponseEntity.ok(userMapper.toUserResponseVm(appUser));
     }

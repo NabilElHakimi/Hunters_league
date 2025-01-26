@@ -32,10 +32,22 @@ public class CompetitionController {
     @PostMapping("/create")
     @PreAuthorize("hasRole('MEMBER')")
     public ResponseEntity<CompetitionResponseVm> createCompetition(@Valid @RequestBody CreateCompetitionVm createCompetitionVm) {
+
         Competition competition = competitionMapper.toCompetition(createCompetitionVm);
         Competition savedCompetition = competitionService.save(competition);
         return ResponseEntity.ok(competitionMapper.toCompetitionResponseVm(savedCompetition));
     }
+
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('MEMBER')")
+    public ResponseEntity<CompetitionResponseVm> updateCompetition(@PathVariable UUID id, @Valid @RequestBody CreateCompetitionVm createCompetitionVm) {
+        Competition existingCompetition = competitionService.getById(id);
+        Competition competition = competitionMapper.toCompetition(createCompetitionVm);
+        competition.setId(existingCompetition.getId());
+        Competition updatedCompetition = competitionService.update(competition);
+        return ResponseEntity.ok(competitionMapper.toCompetitionResponseVm(updatedCompetition));
+    }
+
 
     @GetMapping("/details")
 //    @PreAuthorize("hasRole('MEMBER')")

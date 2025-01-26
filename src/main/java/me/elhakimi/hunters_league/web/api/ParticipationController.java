@@ -77,11 +77,12 @@ public class ParticipationController {
     }
 
 
-    @GetMapping("/getMyResult/{userId}")
+    @GetMapping("/getMyResult")
     @PreAuthorize("hasRole('MEMBER')")
-    public UserResultsResponseVm deleteCompetition(@PathVariable UUID userId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        List<Participation> participation = participationService.findByUserId(userId, page, size);
+    public UserResultsResponseVm deleteCompetition(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        List<Participation> participation = participationService.findByUserId(userService.getByUserName(userService.getCurrentUserName()).getId(), page, size);
         if(!participation.isEmpty()) {
+
             UserResultsResponseVm userResultsResponseVm = new UserResultsResponseVm();
             userResultsResponseVm.setUser(userMapper.toUserResponseVm(participation.get(0).getAppUser()));
             List<CompetitionResults> competitionResultsList = new ArrayList<>();
@@ -105,9 +106,11 @@ public class ParticipationController {
 
     }
 
-    @GetMapping("/getMyHistoric/{userId}")
+    @GetMapping("/getMyHistoric")
     @PreAuthorize("hasRole('MEMBER')")
-    public UserHistoricResponseVm getMyHistoric(@PathVariable UUID userId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public UserHistoricResponseVm getMyHistoric(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+
+        UUID userId = userService.getByUserName(userService.getCurrentUserName()).getId();
         List<Participation> participationList = participationService.findByUserId(userId,page,size);
         UserHistoricResponseVm userHVM = new UserHistoricResponseVm();
         if(participationList.isEmpty()) throw new HuntException("No part");
@@ -125,7 +128,7 @@ public class ParticipationController {
         userHVM.setPastCompetitions(pastCompetitionsResponseVmList);
         return userHVM;
     }
-    @GetMapping("/getTop3")
+    @GetMapping("/top-three")
     @PreAuthorize("hasRole('MEMBER')")
     public List<UserResultsResponseVm> getTop3() {
         List<Participation> participation = participationService.getTop3ParticipationOrderByScoreDesc();

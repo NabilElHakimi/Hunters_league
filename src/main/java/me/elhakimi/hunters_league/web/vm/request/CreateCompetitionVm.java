@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class CreateCompetitionVm {
-    @NotBlank @NonNull
-    @Pattern(regexp = "^[A-Za-z]+_[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+//    @NotBlank @NonNull
+//    @Pattern(regexp = "^[A-Za-z]+_[0-9]{4}-[0-9]{2}-[0-9]{2}$")
     private String code;
     @NonNull @NotBlank
     private String location;
@@ -25,7 +25,5 @@ public class CreateCompetitionVm {
     @NotNull
     private Integer minParticipants;
     @NotNull
-    private Integer maxParticipants;
-    @NotNull
-    private Boolean openRegistration;
+    private Integer maxParticipants;;
 }
